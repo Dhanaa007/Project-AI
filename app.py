@@ -1,13 +1,9 @@
 import streamlit as st
-from groq import Groq
-from dotenv import load_dotenv
 import os
 
-# -------------------------------
-# Load Environment Variables
-# -------------------------------
-load_dotenv()
-API_KEY = os.getenv("GROQ_API_KEY")
+API_KEY = st.secrets["GROQ_API_KEY"]
+
+from groq import Groq
 client = Groq(api_key=API_KEY)
 
 # -------------------------------
@@ -180,9 +176,9 @@ if generate:
                 )
                 result = completion.choices[0].message.content
 
-                st.success("✅ Project idea generated!")
+                st.success(" Project idea generated!")
                 st.divider()
                 st.markdown(result)
 
             except Exception as e:
-                st.error(f"❌ Something went wrong: {e}")
+                st.error(f" Something went wrong: {e}")
